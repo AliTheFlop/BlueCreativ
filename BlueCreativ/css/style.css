@@ -79,6 +79,7 @@ img {
 
 .section {
     padding: var(--section-padding);
+    overflow: hidden;
 }
 
 .section__title {
@@ -154,6 +155,7 @@ img {
 .nav__logo {
     display: block;
     height: 2.5rem; /* Controls the height of the logo */
+    z-index: 1001; /* Ensure logo is above mobile menu background */
 }
 .nav__logo img {
     height: 100%;
@@ -176,6 +178,11 @@ img {
 
 .nav__link:hover {
     color: var(--primary-color);
+}
+
+.nav__toggle,
+.nav__close {
+    display: none; /* Hidden by default */
 }
 
 /* Sticky Header Style */
@@ -427,6 +434,7 @@ img {
         grid-template-columns: 1fr;
     }
 }
+
 @media screen and (min-width: 992px) {
     :root {
         --h1-font-size: 4.5rem;
@@ -439,70 +447,79 @@ img {
 }
 
 @media screen and (max-width: 900px) {
-    .nav__menu {
-        display: none; /* For simplicity; a real project would have a hamburger menu */
+    .nav__btn {
+        display: none;
     }
-    .nav {
-        justify-content: space-around;
+    .nav__toggle {
+        display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #fff;
+        z-index: 1001;
+    }
+    .nav__menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: var(--secondary-color);
+        padding: 6rem 2rem 3rem;
+        transition: right 0.4s ease-in-out;
+        z-index: 1500;
+    }
+    .nav__menu.show-menu {
+        right: 0;
+    }
+    .nav__list {
+        flex-direction: column;
+        text-align: center;
+        gap: 3rem;
+    }
+    .nav__link {
+        color: #fff;
+    }
+    .nav__close {
+        display: block;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
     }
     .hero__title {
         font-size: 2.5rem;
     }
-
     .hero__subtitle {
         font-size: 1rem;
     }
-    .nav .btn {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.8rem;
-    }
-
     :root {
         --h1-font-size: 2.75rem;
         --h2-font-size: 2rem;
         --h3-font-size: 1.15rem;
         --normal-font-size: 0.95rem;
     }
-
     .section {
         padding: 4rem 0;
     }
-
-    .hero__title {
-        font-size: 2.5rem;
-    }
-
-    .hero__subtitle {
-        font-size: 1rem;
-    }
-
-    .nav .btn {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.8rem;
-    }
-
     .process__item {
         padding: 2rem 1.5rem;
     }
-
     .why__container {
         grid-template-columns: 1fr;
         gap: 2rem;
         text-align: center;
     }
-
     .why__stats {
         justify-content: center;
     }
-
     .templates__card-info h4 {
         font-size: 1.2rem;
     }
-
     .footer__container {
         text-align: center;
     }
-
     .footer__socials {
         justify-content: center;
     }
@@ -513,29 +530,23 @@ img {
         --h1-font-size: 2.2rem;
         --h2-font-size: 1.75rem;
     }
-
     .templates__grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
-
     .hero__title {
         font-size: 2rem;
     }
-
     .hero__subtitle {
         font-size: 0.9rem;
     }
-
     .process__item h3 {
         font-size: 1.1rem;
     }
-
     .why__stats {
         gap: 1.5rem;
         flex-wrap: wrap;
         justify-content: center;
     }
-
     .stat-item h3 {
         font-size: 2rem;
     }
