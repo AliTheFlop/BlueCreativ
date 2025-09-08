@@ -1,0 +1,344 @@
+/*=============== GOOGLE FONTS ===============*/
+/* Imported in HTML: Oswald & Raleway */
+
+/*=============== CSS VARIABLES ===============*/
+:root {
+  /* Colors - Dark, Punchy, and Professional */
+  --bg-color: #0A0A0A;
+  --surface-color: #141414;
+  --primary-color: #007BFF; /* A strong, trustworthy blue */
+  --text-color: #F0F0F0;
+  --subtle-text-color: #A0A0A0;
+  --border-color: #2A2A2A;
+
+  /* Typography */
+  --title-font: "Oswald", sans-serif;
+  --body-font: "Raleway", sans-serif;
+
+  --h1-font-size: 4.5rem;
+  --h2-font-size: 3rem;
+  --h3-font-size: 1.5rem;
+  --normal-font-size: 1rem;
+  --small-font-size: 0.875rem;
+
+  /* Spacing */
+  --section-padding: 6rem 0;
+  --container-padding: 0 1.5rem;
+}
+
+/*=============== BASE ===============*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+h1, h2, h3 {
+  font-family: var(--title-font);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--container-padding);
+}
+
+.section {
+  padding: var(--section-padding);
+}
+
+.section__title {
+  font-size: var(--h2-font-size);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.section__subtitle {
+  color: var(--primary-color);
+  font-family: var(--body-font);
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.9rem 2.8rem;
+  border: 2px solid var(--primary-color);
+  font-weight: 700;
+  font-family: var(--title-font);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+/*=============== ANIMATION CLASSES (from your templates) ===============*/
+.animate-in {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animate-in[data-anim-type="fade-in-up"] {
+    transform: translateY(40px);
+}
+.animate-in.is-visible {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/*=============== HEADER & NAV ===============*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  z-index: 1000;
+  transition: background-color 0.4s, box-shadow 0.4s, height 0.4s;
+}
+
+.nav {
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: height 0.4s;
+}
+
+.nav__logo {
+  font-family: var(--title-font);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+/* Sticky Header Style */
+.header.scrolled {
+    background-color: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    height: 5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.header.scrolled .nav {
+    height: 5rem;
+}
+
+/*=============== HERO ===============*/
+.hero {
+  height: 90vh;
+  min-height: 600px;
+  background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8));
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.hero__content {
+  max-width: 900px;
+}
+
+.hero__title {
+  font-size: var(--h1-font-size);
+  margin-bottom: 1rem;
+}
+
+.hero__subtitle {
+  font-size: 1.3rem;
+  color: var(--subtle-text-color);
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/*=============== PROBLEM/SOLUTION ===============*/
+.problem {
+    background-color: var(--surface-color);
+}
+.problem__container {
+    max-width: 800px;
+    text-align: center;
+}
+.problem__description {
+    line-height: 1.8;
+    color: var(--subtle-text-color);
+    font-size: 1.1rem;
+}
+
+
+/*=============== TEMPLATES ===============*/
+.templates {
+    background-color: var(--bg-color);
+}
+.templates__grid {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+.template__card {
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border-color);
+}
+.template__card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    filter: saturate(0.5);
+}
+.template__card:hover img {
+    transform: scale(1.05);
+    filter: saturate(1);
+}
+.template__card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+    padding: 2.5rem 1.5rem 1.5rem;
+    text-align: left;
+}
+.template__card-info h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.25rem;
+}
+.template__card-info span {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/*=============== HOW IT WORKS ===============*/
+.how-it-works {
+    background-color: var(--surface-color);
+}
+.how-it-works__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+.step__item {
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+}
+.step__number {
+    font-size: 2rem;
+    font-family: var(--title-font);
+    font-weight: 700;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+}
+.step__item h3 {
+    font-size: var(--h3-font-size);
+    margin-bottom: 0.75rem;
+}
+.step__item p {
+    color: var(--subtle-text-color);
+    line-height: 1.6;
+}
+
+
+/*=============== CTA / PRICING ===============*/
+.cta {
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat fixed;
+  text-align: center;
+}
+.cta__container {
+    max-width: 800px;
+}
+.cta__price {
+    font-size: 5rem;
+    font-family: var(--title-font);
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 2rem 0;
+}
+.cta__includes {
+    color: var(--subtle-text-color);
+    margin-bottom: 3rem;
+}
+
+
+/*=============== FOOTER ===============*/
+.footer {
+    background-color: #000;
+    padding-top: 6rem;
+}
+.footer__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.footer h2, .footer h3 {
+    margin-bottom: 1.5rem;
+}
+.footer p {
+    color: var(--subtle-text-color);
+    margin-bottom: 0.5rem;
+}
+.footer__copy {
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--subtle-text-color);
+    font-size: var(--small-font-size);
+}
+
+
+/*=============== MEDIA QUERIES ===============*/
+@media screen and (max-width: 900px) {
+    :root {
+        --h1-font-size: 3rem;
+        --h2-font-size: 2.25rem;
+    }
+}
