@@ -307,7 +307,11 @@
                             start the 7-day countdown.
                         </p>
                     </div>
-                    <form action="#" class="contact__form">
+                    <form
+                        id="contact-form"
+                        action="https://submit-form.com/DE991y1zE"
+                        class="contact__form"
+                    >
                         <div
                             class="form__group animate-in"
                             data-anim-type="fade-in-up"
@@ -315,11 +319,13 @@
                         >
                             <input
                                 type="text"
+                                name="name"
                                 placeholder="Your Name"
                                 required
                             />
                             <input
                                 type="email"
+                                name="email"
                                 placeholder="Your Email"
                                 required
                             />
@@ -330,6 +336,7 @@
                             data-anim-delay="300"
                         >
                             <textarea
+                                name="message"
                                 placeholder="Tell us about your business and which template you're interested in."
                                 required
                             ></textarea>
@@ -343,6 +350,9 @@
                             Let's Get Started
                         </button>
                     </form>
+                    <div id="thank-you-message" class="thank-you-message">
+                        Thanks for your message! We'll be in touch soon.
+                    </div>
                 </div>
             </section>
         </main>

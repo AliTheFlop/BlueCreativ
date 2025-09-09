@@ -13,8 +13,8 @@
     --border-color: #dee2e6;
 
     /* Typography */
-    --title-font: 'Roboto Condensed', sans-serif;
-    --body-font: 'Work Sans', sans-serif;
+    --title-font: "Roboto Condensed", sans-serif;
+    --body-font: "Work Sans", sans-serif;
 
     --h1-font-size: 3.5rem;
     --h2-font-size: 2.5rem;
@@ -119,13 +119,13 @@ img {
     opacity: 0;
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
-.animate-in[data-anim-type='fade-in-up'] {
+.animate-in[data-anim-type="fade-in-up"] {
     transform: translateY(40px);
 }
-.animate-in[data-anim-type='fade-in-left'] {
+.animate-in[data-anim-type="fade-in-left"] {
     transform: translateX(-50px);
 }
-.animate-in[data-anim-type='fade-in-right'] {
+.animate-in[data-anim-type="fade-in-right"] {
     transform: translateX(50px);
 }
 .animate-in.is-visible {
@@ -206,7 +206,7 @@ img {
     height: 100vh;
     min-height: 700px;
     background: linear-gradient(rgba(13, 47, 79, 0.7), rgba(13, 47, 79, 0.7)),
-        url('https://images.pexels.com/photos/5439473/pexels-photo-5439473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
+        url("https://images.pexels.com/photos/5439473/pexels-photo-5439473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
             center/cover no-repeat;
     display: flex;
     align-items: center;
@@ -382,6 +382,13 @@ img {
 .contact__form button {
     justify-self: center;
     cursor: pointer;
+}
+
+.thank-you-message {
+    display: none;
+    margin-top: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 /*=============== FOOTER ===============*/
