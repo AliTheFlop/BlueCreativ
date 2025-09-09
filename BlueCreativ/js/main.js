@@ -89,43 +89,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (contactForm) {
         contactForm.addEventListener("submit", async (e) => {
+            // Stop the form's default submission and event bubbling
             e.preventDefault();
+            e.stopPropagation();
 
-            console.log("Sending form...");
-
-            const formData = new FormData(contactForm);
             const action = contactForm.getAttribute("action");
 
-            console.log("Form data captured:");
-            for (let [key, value] of formData.entries()) {
-                console.log(`${key}: ${value}`);
-            }
+            // Manually create a JavaScript object from the form inputs
+            const formData = {
+                name: contactForm.querySelector('[name="name"]').value,
+                email: contactForm.querySelector('[name="email"]').value,
+                message: contactForm.querySelector('[name="message"]').value,
+            };
 
             try {
                 const response = await fetch(action, {
                     method: "POST",
-                    body: formData,
+                    // Set headers to match your working React code
                     headers: {
+                        "Content-Type": "application/json",
                         Accept: "application/json",
                     },
+                    // Stringify the object into JSON, just like in React
+                    body: JSON.stringify(formData),
                 });
-
-                console.log(response);
 
                 if (response.ok) {
                     thankYouMessage.style.display = "block";
                     contactForm.reset();
+                    // Optional: hide the message after 5 seconds
+                    setTimeout(() => {
+                        thankYouMessage.style.display = "none";
+                    }, 5000);
                 } else {
-                    // Handle errors if you want to
-                    alert(
-                        "There was an error submitting the form. Please try again."
-                    );
+                    alert("Submission failed with status: " + response.status);
                 }
             } catch (error) {
                 console.error("Error submitting form:", error);
-                alert(
-                    "There was an error submitting the form. Please try again."
-                );
+                alert("An error occurred. Please check the console.");
             }
         });
     }
