@@ -1,2 +1,5 @@
-Ads/
-Logos/
+# Ignore the Ads folder at the root
+/Ads/
+
+# Ignore the Logos folder at the root
+/Logos/
