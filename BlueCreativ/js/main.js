@@ -7,9 +7,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     requestAnimationFrame(raf);
 
-    // --- 2. Sticky Header on Scroll ---
+    // --- 2. Sticky Header on Scroll (Modified) ---
     const header = document.getElementById("header");
-    if (header) {
+    const heroSection = document.querySelector(".hero"); // Check for hero section
+
+    // Only run the scroll effect if the hero section exists (i.e., on the main page)
+    if (header && heroSection) {
+        // Set initial state based on scroll position
+        if (window.scrollY > 50) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
+
+        // Add scroll listener
         window.addEventListener("scroll", () => {
             if (window.scrollY > 50) {
                 header.classList.add("scrolled");
@@ -18,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
 
     // --- 3. Staggered Animation on Scroll ---
     const animatedElements = document.querySelectorAll(".animate-in");
@@ -73,6 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
     navLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
             const targetId = link.getAttribute("href");
+            // If the link is to another page, don't prevent default
+            if (targetId.includes('.html')) {
+                return;
+            }
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
@@ -85,49 +101,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 5. Formspark Submission ---
     const contactForm = document.getElementById("contact-form");
+    const newsletterForm = document.getElementById("newsletter-form");
     const thankYouMessage = document.getElementById("thank-you-message");
 
-    if (contactForm) {
-        contactForm.addEventListener("submit", async (e) => {
-            // Stop the form's default submission and event bubbling
-            e.preventDefault();
-            e.stopPropagation();
+    const handleFormSubmit = async (form, event) => {
+        event.preventDefault();
+        event.stopPropagation();
 
-            const action = contactForm.getAttribute("action");
+        const action = form.getAttribute("action");
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
 
-            // Manually create a JavaScript object from the form inputs
-            const formData = {
-                name: contactForm.querySelector('[name="name"]').value,
-                email: contactForm.querySelector('[name="email"]').value,
-                message: contactForm.querySelector('[name="message"]').value,
-            };
 
-            try {
-                const response = await fetch(action, {
-                    method: "POST",
-                    // Set headers to match your working React code
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                    },
-                    // Stringify the object into JSON, just like in React
-                    body: JSON.stringify(formData),
-                });
+        try {
+            const response = await fetch(action, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify(data),
+            });
 
-                if (response.ok) {
-                    thankYouMessage.style.display = "block";
-                    contactForm.reset();
-                    // Optional: hide the message after 5 seconds
-                    setTimeout(() => {
-                        thankYouMessage.style.display = "none";
-                    }, 5000);
-                } else {
-                    alert("Submission failed with status: " + response.status);
-                }
-            } catch (error) {
-                console.error("Error submitting form:", error);
-                alert("An error occurred. Please check the console.");
+            if (response.ok) {
+                thankYouMessage.style.display = "block";
+                form.reset();
+                setTimeout(() => {
+                    thankYouMessage.style.display = "none";
+                }, 5000);
+            } else {
+                alert("Submission failed with status: " + response.status);
             }
-        });
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("An error occurred. Please check the console.");
+        }
+    };
+
+    if (contactForm) {
+        contactForm.addEventListener("submit", (e) => handleFormSubmit(contactForm, e));
+    }
+
+    if (newsletterForm) {
+        newsletterForm.addEventListener("submit", (e) => handleFormSubmit(newsletterForm, e));
     }
 });

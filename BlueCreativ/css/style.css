@@ -391,6 +391,20 @@ img {
     font-weight: 600;
 }
 
+/*=============== NEWSLETTER ===============*/
+.newsletter {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.newsletter__container {
+    max-width: 600px;
+}
+
+
 /*=============== FOOTER ===============*/
 .footer {
     background-color: var(--secondary-color);
