@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
     // --- 3. Staggered Animation on Scroll ---
     const animatedElements = document.querySelectorAll(".animate-in");
 
@@ -86,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         link.addEventListener("click", (e) => {
             const targetId = link.getAttribute("href");
             // If the link is to another page, don't prevent default
-            if (targetId.includes('.html')) {
+            if (targetId.includes(".html")) {
                 return;
             }
             const targetElement = document.querySelector(targetId);
@@ -111,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const action = form.getAttribute("action");
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-
 
         try {
             const response = await fetch(action, {
@@ -139,10 +137,34 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     if (contactForm) {
-        contactForm.addEventListener("submit", (e) => handleFormSubmit(contactForm, e));
+        contactForm.addEventListener("submit", (e) =>
+            handleFormSubmit(contactForm, e)
+        );
     }
 
     if (newsletterForm) {
-        newsletterForm.addEventListener("submit", (e) => handleFormSubmit(newsletterForm, e));
+        newsletterForm.addEventListener("submit", (e) =>
+            handleFormSubmit(newsletterForm, e)
+        );
     }
+
+    // --- 6. FAQ Accordion Logic ---
+    const faqItems = document.querySelectorAll(".faq__item");
+
+    faqItems.forEach((item) => {
+        const question = item.querySelector(".faq__question");
+
+        question.addEventListener("click", () => {
+            // Check if the item is already active
+            const isActive = item.classList.contains("active");
+
+            // Optional: Close all other items
+            faqItems.forEach((i) => i.classList.remove("active"));
+
+            // If it wasn't active, open it
+            if (!isActive) {
+                item.classList.toggle("active");
+            }
+        });
+    });
 });
